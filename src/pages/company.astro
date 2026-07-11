@@ -1,6 +1,8 @@
 ---
 export const prerender = false;
 
+import { env } from 'cloudflare:workers';
+
 interface Company {
 	slug: string;
 	name: string;
@@ -19,7 +21,7 @@ interface QaRow {
 }
 
 const slug = Astro.url.searchParams.get('id')?.trim();
-const db = Astro.locals.runtime.env.DB;
+const db = env.DB;
 
 const company = slug
 	? await db
@@ -156,8 +158,13 @@ const categoryEntries = [...categories.entries()];
 		</main>
 
 		<script>
+			interface SelectControl {
+				value: string;
+				addEventListener(type: 'change', listener: () => void): void;
+			}
+
 			const searchInput = document.querySelector<HTMLInputElement>('#qa-search');
-			const categorySelect = document.querySelector<HTMLSelectElement>('#category-filter');
+			const categorySelect = document.querySelector('#category-filter') as SelectControl | null;
 			const sections = [...document.querySelectorAll<HTMLElement>('.qa-section')];
 			const noResults = document.querySelector<HTMLElement>('#no-results');
 

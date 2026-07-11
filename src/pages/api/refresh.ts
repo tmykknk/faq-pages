@@ -1,13 +1,7 @@
 import type { APIRoute } from 'astro';
+import { env } from 'cloudflare:workers';
 
 export const prerender = false;
-
-interface Env {
-	DB: D1Database;
-	GOOGLE_SERVICE_ACCOUNT_KEY: string;
-	SPREADSHEET_ID: string;
-	REFRESH_TOKEN: string;
-}
 
 interface ServiceAccountKey {
 	client_email: string;
@@ -44,8 +38,7 @@ interface QaRow {
 const SHEETS_SCOPE = 'https://www.googleapis.com/auth/spreadsheets.readonly';
 const IDENTIFIER_PATTERN = /^[A-Za-z0-9]+$/;
 
-export const POST: APIRoute = async ({ request, locals }) => {
-	const env = locals.runtime.env as Env;
+export const POST: APIRoute = async ({ request }) => {
 	const authorization = request.headers.get('Authorization');
 	if (authorization !== `Bearer ${env.REFRESH_TOKEN}`) {
 		return json({ message: '認証に失敗しました。更新トークンをご確認ください。' }, 401);

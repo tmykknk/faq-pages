@@ -184,7 +184,7 @@ curl -X POST http://localhost:4321/api/refresh \
 ---
 
 ## 8. 環境変数・シークレットの登録（ダッシュボード側）
-
+🔧 Cloudflare の設定が変わってたので修正
 Pagesプロジェクト →「Settings」→「Variables and secrets」で、
 **Variable name** と **Value** の両方に以下を登録します。
 

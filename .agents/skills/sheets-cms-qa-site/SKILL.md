@@ -76,6 +76,7 @@ At render time, an organization's QA is `共通QA` (all orgs) + `個別QA_<their
 5. **Apps Script menu** in the spreadsheet — see `references/apps-script.md`. Calls the refresh route with a bearer token in the `Authorization` header, never as a URL/query parameter.
 6. **Cloudflare Pages configuration** — see `references/cloudflare-setup.md` for D1 binding, environment variables/secrets, and build settings.
 7. **README.md** — write a separate `README.md` at the project root documenting local environment setup (Node/pnpm install, `pnpm astro dev`, `wrangler d1` local migration commands, required `.dev.vars`/env vars for local testing). Keep this out of the application code comments — it's the onboarding doc for the next engineer who clones the repo, so it belongs in its own file, not folded into this skill's output or into inline comments.
+8. **Type checking and lint** — set up `astro check`, `wrangler types`, and ESLint (`typescript-eslint` + `eslint-plugin-astro`) per `references/quality.md` before considering the build done. Run the combined `pnpm verify` script and treat the build as incomplete until it's clean.
 
 ## Frontend design
 
@@ -108,3 +109,5 @@ the rendering route's markup or CSS. The decided direction, in brief:
 - [ ] QA items render as accordions with a visible `+`/`−` state change and correct `aria-expanded`
 - [ ] The category `<select>` and search box are both driven by the actual merged data, not hardcoded
 - [ ] All colors are declared via `oklch()` custom properties, and the terracotta accent is used sparingly rather than as a section/card fill
+- [ ] `pnpm verify` (typecheck + lint, see `references/quality.md`) passes clean — not "pre-existing errors only"
+- [ ] A clean `pnpm verify` is not treated as proof the refresh API is safe against bad sheet data — the runtime validation checks above still apply separately
