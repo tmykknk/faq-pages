@@ -1,0 +1,8 @@
+.astro/
+.wrangler/
+dist/
+node_modules/
+.dev.vars
+.env*
+pnpm-lock.yaml
+worker-configuration.d.ts

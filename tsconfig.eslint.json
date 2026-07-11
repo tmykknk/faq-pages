@@ -1,11 +1,11 @@
 {
-  "extends": "./tsconfig.json",
-  "include": [
-    ".astro/types.d.ts",
-    "src/**/*",
-    "astro.config.mjs",
-    "eslint.config.mjs",
-    "jsx.d.ts",
-    "worker-configuration.d.ts"
-  ]
+    "extends": "./tsconfig.json",
+    "include": [
+        ".astro/types.d.ts",
+        "src/**/*",
+        "astro.config.mjs",
+        "eslint.config.mjs",
+        "jsx.d.ts",
+        "worker-configuration.d.ts"
+    ]
 }

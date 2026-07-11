@@ -1,12 +1,28 @@
-# Quality gates: type checking and lint
+# Quality gates: formatting, type checking, and lint
 
 This project's data source is a spreadsheet non-engineers edit freely.
-TypeScript and lint catch mistakes in the code you write; they cannot catch
+Prettier, TypeScript, and lint keep code consistent and catch mistakes in the code you write; they cannot catch
 a category cell left blank or a 公開 column containing something other than
 TRUE/FALSE. Treat static checks and runtime validation as two separate,
 both-required layers — see the last section here, and
 `references/refresh-api.md` for the validation this implies for the sync
 logic specifically.
+
+## Formatting
+
+- Use Prettier with `prettier-plugin-astro` so `.astro` files and their
+  frontmatter use the same project formatting rules as TypeScript and config
+  files.
+- Add both a write command and a check command. Keep generated files,
+  lockfiles, and secret files out of Prettier's target list.
+
+  ```json
+  {
+    "scripts": {
+      "format": "prettier --write <project files>",
+      "format:check": "prettier --check <project files>"
+    }
+  }
 
 ## Type checking
 
@@ -55,7 +71,7 @@ logic specifically.
 ## Combined verification
 
 ```json
-{ "scripts": { "verify": "pnpm typecheck && pnpm lint" } }
+{ "scripts": { "verify": "pnpm format:check && pnpm typecheck && pnpm lint" } }
 ```
 
 Run `pnpm verify` after any implementation pass and treat it as done only
@@ -63,7 +79,7 @@ when it exits clean — not "mostly clean" or "pre-existing errors only."
 
 ## Static checks are not enough for this project
 
-TypeScript and lint check the code you wrote. They say nothing about the
+Prettier, TypeScript, and lint check the code you wrote. They say nothing about the
 spreadsheet data flowing through it, because that data has no compile-time
 type — it's whatever a non-engineer typed into a cell. A category column
 that's blank, a 公開 column containing "はい" instead of TRUE/FALSE, or a

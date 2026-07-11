@@ -1,23 +1,21 @@
 {
-	"$schema": "./node_modules/wrangler/config-schema.json",
-	"compatibility_date": "2026-07-11",
-	"compatibility_flags": [
-		"global_fetch_strictly_public"
-	],
-	"name": "faq-pages",
-	"main": "@astrojs/cloudflare/entrypoints/server",
-	"assets": {
-		"directory": "./dist",
-		"binding": "ASSETS"
-	},
-	"observability": {
-		"enabled": true
-	},
-	"d1_databases": [
-		{
-			"binding": "DB",
-			"database_name": "faq-pages-db",
-			"database_id": "d7e57829-3410-4349-9bb9-51bfcc89b8cb"
-		}
-	]
+    "$schema": "./node_modules/wrangler/config-schema.json",
+    "compatibility_date": "2026-07-11",
+    "compatibility_flags": ["global_fetch_strictly_public"],
+    "name": "faq-pages",
+    "main": "@astrojs/cloudflare/entrypoints/server",
+    "assets": {
+        "directory": "./dist",
+        "binding": "ASSETS",
+    },
+    "observability": {
+        "enabled": true,
+    },
+    "d1_databases": [
+        {
+            "binding": "DB",
+            "database_name": "faq-pages-db",
+            "database_id": "d7e57829-3410-4349-9bb9-51bfcc89b8cb",
+        },
+    ],
 }

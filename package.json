@@ -1,31 +1,35 @@
 {
-  "name": "faq-pages",
-  "type": "module",
-  "version": "0.0.1",
-  "engines": {
-    "node": ">=22.12.0"
-  },
-  "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro",
-    "typecheck": "astro check",
-    "lint": "eslint .",
-    "verify": "pnpm typecheck && pnpm lint",
-    "generate-types": "wrangler types"
-  },
-  "dependencies": {
-    "@astrojs/cloudflare": "^14.1.2",
-    "astro": "^7.0.7",
-    "wrangler": "^4.110.0"
-  },
-  "devDependencies": {
-    "@astrojs/check": "^0.9.9",
-    "@eslint/js": "^10.0.1",
-    "eslint": "^10.6.0",
-    "eslint-plugin-astro": "^2.1.1",
-    "typescript": "^5.9.3",
-    "typescript-eslint": "^8.63.0"
-  }
+    "name": "faq-pages",
+    "type": "module",
+    "version": "0.0.1",
+    "engines": {
+        "node": ">=22.12.0"
+    },
+    "scripts": {
+        "dev": "astro dev",
+        "build": "astro build",
+        "preview": "astro preview",
+        "astro": "astro",
+        "typecheck": "astro check",
+        "lint": "eslint .",
+        "verify": "pnpm format:check && pnpm typecheck && pnpm lint",
+        "generate-types": "wrangler types",
+        "format": "prettier --write src package.json astro.config.mjs eslint.config.mjs jsx.d.ts pnpm-workspace.yaml prettier.config.mjs tsconfig.eslint.json tsconfig.json wrangler.jsonc",
+        "format:check": "prettier --check src package.json astro.config.mjs eslint.config.mjs jsx.d.ts pnpm-workspace.yaml prettier.config.mjs tsconfig.eslint.json tsconfig.json wrangler.jsonc"
+    },
+    "dependencies": {
+        "@astrojs/cloudflare": "^14.1.2",
+        "astro": "^7.0.7",
+        "wrangler": "^4.110.0"
+    },
+    "devDependencies": {
+        "@astrojs/check": "^0.9.9",
+        "@eslint/js": "^10.0.1",
+        "eslint": "^10.6.0",
+        "eslint-plugin-astro": "^2.1.1",
+        "prettier": "^3.9.5",
+        "prettier-plugin-astro": "^0.14.1",
+        "typescript": "^5.9.3",
+        "typescript-eslint": "^8.63.0"
+    }
 }
