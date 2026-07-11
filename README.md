@@ -158,7 +158,10 @@ http://localhost:4321/company?id=sample-a
 
 ```bash
 curl -X POST http://localhost:4321/api/refresh \
-  -H "Authorization: Bearer ＜.dev.varsに設定したREFRESH_TOKEN＞"
+  -H 'Authorization: Bearer <REFRESH_TOKEN>' \
+  -H 'Content-Type: application/json' \
+  --data '{}'
+
 ```
 
 `{"message": "3社・45件のQAを反映しました"}` のようなレスポンスが返れば成功です。

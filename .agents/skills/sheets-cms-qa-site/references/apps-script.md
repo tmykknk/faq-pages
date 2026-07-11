@@ -13,14 +13,21 @@ function onOpen() {
 
 function refreshSite() {
   const token = PropertiesService.getScriptProperties().getProperty('REFRESH_TOKEN');
+
   const res = UrlFetchApp.fetch('https://<your-site>.pages.dev/api/refresh', {
     method: 'post',
-    headers: { 'Authorization': 'Bearer ' + token },
-    muteHttpExceptions: true
+    contentType: 'application/json',
+    payload: '{}',
+    headers: {
+      Authorization: 'Bearer ' + token,
+    },
+    muteHttpExceptions: true,
   });
+
   const body = JSON.parse(res.getContentText());
   SpreadsheetApp.getUi().alert(body.message);
 }
+
 ```
 
 ## Setup steps
