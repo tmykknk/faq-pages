@@ -184,8 +184,7 @@ curl -X POST http://localhost:4321/api/refresh \
 ---
 
 ## 8. 環境変数・シークレットの登録（ダッシュボード側）
-🔧 Cloudflare の設定が変わってたので修正
-Pagesプロジェクト →「Settings」→「Variables and secrets」で、
+  Pagesプロジェクト →「Settings」→「Variables and secrets」で、
 **Variable name** と **Value** の両方に以下を登録します。
 
 | 変数名 | 値 | タイプ |
@@ -193,6 +192,13 @@ Pagesプロジェクト →「Settings」→「Variables and secrets」で、
 | `GOOGLE_SERVICE_ACCOUNT_KEY` | サービスアカウントのJSONキー全体 | Secret |
 | `SPREADSHEET_ID` | 対象スプレッドシートのID | Plain text |
 | `REFRESH_TOKEN` | 更新API認証用のランダムな文字列（`.dev.vars`とは別に、本番用として新しく発行推奨） | Secret |
+
+また、Cloudflare Pagesの環境変数でNode/pnpmを固定する（ローカルと合わせる）ため
+「Settings」→「Build」→「Variables and secrets」にビルド環境変数を設定します。
+| 変数名 | 値 |
+|---|---|
+| `NODE_VERSION` | 26 |
+| `PNPM_VERSION` | 11 |
 
 ---
 
