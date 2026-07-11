@@ -169,20 +169,14 @@ curl -X POST http://localhost:4321/api/refresh \
 
 1. Cloudflareダッシュボード → 「Workers & Pages」→「作成」→「Pages」タブ
 2. 対象のGitHubリポジトリを選択して接続（push時に自動デプロイされます）
-3. ビルド設定
-   - フレームワークプリセット: `Astro`
-   - ビルドコマンド: `pnpm run build`
-   - ビルド出力ディレクトリ: `dist`
-   - ルートディレクトリ: リポジトリ構成に応じて設定
 
 ---
 
 ## 7. D1バインディングの紐付け（ダッシュボード側）
 
-1. 作成したPagesプロジェクト →「Settings」→「Functions」
-2. 「D1 database bindings」で「Add binding」
-3. Variable name: `DB`（`wrangler.jsonc` の `binding` と完全一致させること）
-4. Database: 手順3で作成した `faq-pages-db` を選択
+1. 作成したPagesプロジェクト →「Bindings」-> D1 database で Add binding
+2. Variable name: `DB`（`wrangler.jsonc` の `binding` と完全一致させること）
+3. Database: 手順2で作成した `faq-pages-db` を選択して Add binding
 
 > `wrangler.jsonc`（ローカル用）とダッシュボード（本番デプロイ用）は別々の設定です。
 > 片方だけ設定して「動かない」とならないよう、両方に同じ内容を設定してください。
@@ -191,8 +185,8 @@ curl -X POST http://localhost:4321/api/refresh \
 
 ## 8. 環境変数・シークレットの登録（ダッシュボード側）
 
-Pagesプロジェクト →「Settings」→「Environment variables」で、
-**Production** と **Preview** の両方に以下を登録します。
+Pagesプロジェクト →「Settings」→「Variables and secrets」で、
+**Variable name** と **Value** の両方に以下を登録します。
 
 | 変数名 | 値 | タイプ |
 |---|---|---|
