@@ -32,9 +32,13 @@ the Apps Script menu button, never by a page visitor.
 
 6. **Write to D1.** Recommended pattern per refresh:
    - `INSERT OR REPLACE` into `companies` for each 設定 row
-   - `DELETE FROM common_qa` then re-insert all 共通QA rows
+   - `DELETE FROM common_qa` then re-insert all 共通QA rows **in the exact
+     order they were read from the sheet** — there's no display_order
+     column, so insertion order is the only thing that determines render
+     order (`id` auto-increments in insertion order, and rendering does
+     `ORDER BY id`)
    - `DELETE FROM company_qa` then re-insert all rows from every `個別QA_*`
-     tab (set `company_slug` from the tab name suffix)
+     tab in sheet row order (set `company_slug` from the tab name suffix)
 
    Wrap steps in a D1 batch/transaction so a mid-write failure doesn't leave
    half the tables updated.

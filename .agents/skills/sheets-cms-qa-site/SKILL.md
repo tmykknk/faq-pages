@@ -61,10 +61,11 @@ Tab and column names shown to non-engineers must be **Japanese**. The one except
 | カテゴリ | e.g. "料金について". Reuse a category name from 共通QA in an individual tab to append to that category; use a new name to create an org-specific category |
 | 質問 | |
 | 回答 | |
-| 表示順 | order within the category |
 | 公開 | TRUE / FALSE |
 
-At render time, an organization's QA is `共通QA` (all orgs) + `個別QA_<their identifier>` (their tab only), grouped by カテゴリ and sorted by 表示順. This is additive only — 個別QA never overrides or removes a 共通QA row. If a user asks for override/exclusion behavior, that's a schema change (e.g. an "override target ID" column) — don't invent it silently, confirm with the user first.
+There is no 表示順 column — display order follows row order in the sheet (top to bottom), so reordering is just dragging rows. Preserve that row order end to end: fetch rows in sheet order, insert into D1 preserving that order (e.g. an auto-increment `id` that mirrors insertion order), and `ORDER BY id` when rendering — don't re-sort by any other key.
+
+At render time, an organization's QA is `共通QA` (all orgs) + `個別QA_<their identifier>` (their tab only), grouped by カテゴリ. Within a category, 共通QA rows render first in their sheet order, followed by that organization's 個別QA rows in their sheet order. This is additive only — 個別QA never overrides or removes a 共通QA row. If a user asks for override/exclusion behavior, that's a schema change (e.g. an "override target ID" column) — don't invent it silently, confirm with the user first.
 
 ## Build order
 
@@ -101,7 +102,7 @@ the rendering route's markup or CSS. The decided direction, in brief:
 - [ ] `spreadsheets.values.batchGet` (or equivalent) fetches 設定, 共通QA, and all `個別QA_*` tabs in a single API call
 - [ ] Refresh route rejects a request where a `個別QA_<識別子>` tab's suffix doesn't match any 識別子 in 設定, without writing partial/corrupt data to D1
 - [ ] `?id=` for a non-existent or 非公開 (公開=FALSE) organization returns a clean not-found response, not a broken page
-- [ ] A 共通QA row and a `個別QA_<識別子>` row in the same カテゴリ render together, ordered by 表示順
+- [ ] A 共通QA row and a `個別QA_<識別子>` row in the same カテゴリ render together, 共通QA rows first, each group preserving its original sheet row order
 - [ ] The refresh token lives in the Apps Script Script Properties and the Cloudflare secret store — never in a URL, query string, or committed file
 - [ ] `README.md` exists at the project root with pnpm-based setup steps, separate from SKILL-driven output
 - [ ] QA items render as accordions with a visible `+`/`−` state change and correct `aria-expanded`
