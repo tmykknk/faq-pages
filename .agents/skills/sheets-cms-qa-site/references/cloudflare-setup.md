@@ -9,13 +9,22 @@ this project standardizes on pnpm.
 pnpm wrangler d1 create <db-name>
 ```
 
-Copy the returned `database_id` into `wrangler.toml`:
+Copy the returned `database_id` into `wrangler.jsonc` (Cloudflare's current
+default config format — `wrangler.toml` still works, but new scaffolding
+tools generate `.jsonc`, so this skill assumes `.jsonc`):
 
-```toml
-[[d1_databases]]
-binding = "DB"
-database_name = "<db-name>"
-database_id = "<paste-id-here>"
+```jsonc
+{
+  "name": "faq-pages",
+  "compatibility_date": "<today's date>",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "<db-name>",
+      "database_id": "<paste-id-here>"
+    }
+  ]
+}
 ```
 
 ## 2. Apply the schema
@@ -35,8 +44,8 @@ pnpm wrangler d1 migrations apply <db-name> --remote                         # p
 ## 4. Bind D1 in the dashboard
 
 Pages project > Settings > Functions > D1 database bindings. Binding name
-must match `wrangler.toml` exactly (`DB`). This has to be set in **both**
-`wrangler.toml` (for local `wrangler dev`) and the dashboard (for the
+must match `wrangler.jsonc` exactly (`DB`). This has to be set in **both**
+`wrangler.jsonc` (for local `wrangler dev`) and the dashboard (for the
 deployed build) — they don't share configuration automatically.
 
 ## 5. Environment variables / secrets
