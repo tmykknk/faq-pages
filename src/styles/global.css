@@ -1,0 +1,25 @@
+:root {
+    --color-bg: oklch(95.9% 0.01 87.5);
+    --color-surface: oklch(98% 0.005 87.5);
+    --color-border: oklch(88.4% 0.018 81.3);
+    --color-ink: oklch(26.2% 0.007 67.5);
+    --color-ink-muted: oklch(53.7% 0.019 70.3);
+    --color-accent: oklch(67.2% 0.131 38.8);
+    --color-accent-ink: oklch(98% 0.005 87.5);
+    --font-sans:
+        ui-sans-serif, -apple-system, "Segoe UI", "Helvetica Neue", Arial,
+        sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+}
+body {
+    margin: 0;
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+}
