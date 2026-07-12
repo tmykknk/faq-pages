@@ -47,6 +47,24 @@ export const POST: APIRoute = async ({ request }) => {
         );
     }
 
+    const { success } = await env.REFRESH_RATE_LIMIT.limit({
+        key: "refresh",
+    });
+
+    if (!success) {
+        return json(
+            {
+                message:
+                    "短時間に更新が繰り返されました。しばらく待ってから再試行してください。",
+            },
+            429,
+            {
+                "Cache-Control": "no-store",
+                "Retry-After": "60",
+            },
+        );
+    }
+
     try {
         const accessToken = await getAccessToken(
             env.GOOGLE_SERVICE_ACCOUNT_KEY,
