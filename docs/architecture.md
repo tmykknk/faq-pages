@@ -40,7 +40,7 @@ flowchart LR
 3. D1 の `companies` から、識別子が一致し、かつ `公開 = TRUE` の会社を取得します。
 4. D1 の `common_qa` と、その会社の `company_qa` を取得します。
 5. 共通 QA を先、会社別 QA を後にしてカテゴリごとにまとめ、HTML をサーバーで生成します。
-6. ブラウザでは外部 JavaScript が検索・カテゴリ絞り込み・アコーディオン表示だけを担当します。
+6. 検索・カテゴリ絞り込みは外部 JavaScript、アコーディオンの開閉はネイティブの `<details>/<summary>` と CSS が担当します。
 
 会社が存在しない、または非公開の場合は `404` を返します。閲覧時に Google Sheets API は呼びません。
 
@@ -136,7 +136,7 @@ flowchart TB
 | ファイル                    | 役割                                          |
 | --------------------------- | --------------------------------------------- |
 | `src/pages/company.astro`   | QA ページの SSR、D1 の読み取り、HTML の生成   |
-| `src/scripts/company.ts`    | 検索・絞り込み・アコーディオンのブラウザ操作  |
+| `src/scripts/company.ts`    | 検索・カテゴリ絞り込みのブラウザ操作          |
 | `src/pages/api/refresh.ts`  | Google Sheets 取得、検証、D1 同期             |
 | `src/middleware.ts`         | セキュリティヘッダーの付与                    |
 | `wrangler.jsonc`            | Worker、D1、レート制限、静的アセットの設定    |

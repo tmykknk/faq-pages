@@ -163,59 +163,37 @@ const categoryEntries = [...categories.entries()];
                                             >
                                                 <h2>{category}</h2>
                                                 <div class="qa-list">
-                                                    {rows.map((qa, qaIndex) => {
-                                                        const answerId = `answer-${categoryIndex}-${qaIndex}`;
-                                                        return (
-                                                            <article
-                                                                class="qa-item"
-                                                                data-search-text={`${qa.question} ${qa.answer}`.toLocaleLowerCase(
-                                                                    "ja",
-                                                                )}
-                                                            >
-                                                                <h3>
-                                                                    <button
-                                                                        type="button"
-                                                                        class="qa-trigger"
-                                                                        aria-expanded="false"
-                                                                        aria-controls={
-                                                                            answerId
-                                                                        }
+                                                    {rows.map((qa) => (
+                                                        <details
+                                                            class="qa-item"
+                                                            data-search-text={`${qa.question} ${qa.answer}`.toLocaleLowerCase(
+                                                                "ja",
+                                                            )}
+                                                        >
+                                                            <summary class="qa-trigger">
+                                                                <span class="question">
+                                                                    <span
+                                                                        class="q-mark"
+                                                                        aria-hidden="true"
                                                                     >
-                                                                        <span class="question">
-                                                                            <span
-                                                                                class="q-mark"
-                                                                                aria-hidden="true"
-                                                                            >
-                                                                                Q.
-                                                                            </span>
-                                                                            {
-                                                                                qa.question
-                                                                            }
-                                                                        </span>
-                                                                        <span
-                                                                            class="indicator"
-                                                                            aria-hidden="true"
-                                                                        >
-                                                                            +
-                                                                        </span>
-                                                                    </button>
-                                                                </h3>
-                                                                <div
-                                                                    class="answer"
-                                                                    id={
-                                                                        answerId
+                                                                        Q.
+                                                                    </span>
+                                                                    {
+                                                                        qa.question
                                                                     }
+                                                                </span>
+                                                                <span
+                                                                    class="indicator"
                                                                     aria-hidden="true"
-                                                                >
-                                                                    <p>
-                                                                        {
-                                                                            qa.answer
-                                                                        }
-                                                                    </p>
-                                                                </div>
-                                                            </article>
-                                                        );
-                                                    })}
+                                                                />
+                                                            </summary>
+                                                            <div class="answer">
+                                                                <p>
+                                                                    {qa.answer}
+                                                                </p>
+                                                            </div>
+                                                        </details>
+                                                    ))}
                                                 </div>
                                             </section>
                                         ),

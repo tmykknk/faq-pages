@@ -122,8 +122,21 @@ input:focus-visible,
 .qa-item + .qa-item {
     border-top: 1px solid var(--color-border);
 }
-.qa-item h3 {
-    margin: 0;
+.qa-item {
+    interpolate-size: allow-keywords;
+}
+.qa-item::details-content {
+    height: 0;
+    overflow: clip;
+    opacity: 0;
+    transition:
+        height 260ms ease,
+        opacity 180ms ease,
+        content-visibility 260ms ease allow-discrete;
+}
+.qa-item[open]::details-content {
+    height: auto;
+    opacity: 1;
 }
 .qa-trigger {
     display: flex;
@@ -137,8 +150,12 @@ input:focus-visible,
     color: var(--color-ink);
     font: inherit;
     font-weight: 520;
+    list-style: none;
     text-align: left;
     cursor: pointer;
+}
+.qa-trigger::-webkit-details-marker {
+    display: none;
 }
 .question {
     display: flex;
@@ -157,29 +174,24 @@ input:focus-visible,
     font-size: 1.35rem;
     font-weight: 350;
 }
-.qa-trigger[aria-expanded="true"] .indicator {
+.indicator::before {
+    content: "+";
+}
+.qa-item[open] .indicator {
     color: var(--color-accent);
 }
+.qa-item[open] .indicator::before {
+    content: "−";
+}
 .answer {
-    display: grid;
-    grid-template-rows: 0fr;
-    padding: 0 3.3rem;
-    transition-duration: 220ms;
-    transition-property: grid-template-rows, padding-block;
-    transition-timing-function: ease;
+    padding: 0 3.3rem 2rem;
 }
 .answer p {
-    min-height: 0;
     margin: 0;
-    overflow: hidden;
     color: var(--color-ink-muted);
     font-size: 0.98rem;
     white-space: pre-line;
     line-height: 1.7;
-}
-.qa-item.is-open .answer {
-    grid-template-rows: 1fr;
-    padding-bottom: 2rem;
 }
 .company-info {
     margin-top: 4rem;
@@ -240,5 +252,8 @@ input:focus-visible,
     }
     * {
         transition-duration: 0s !important;
+    }
+    .qa-item::details-content {
+        transition-duration: 0s;
     }
 }

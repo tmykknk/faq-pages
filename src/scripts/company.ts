@@ -44,20 +44,3 @@ categorySelect?.addEventListener("change", () => {
             block: "start",
         });
 });
-
-for (const trigger of document.querySelectorAll<HTMLButtonElement>(
-    ".qa-trigger",
-)) {
-    trigger.addEventListener("click", () => {
-        const isExpanded = trigger.getAttribute("aria-expanded") === "true";
-        const answer = document.getElementById(
-            trigger.getAttribute("aria-controls") ?? "",
-        );
-        const item = trigger.closest<HTMLElement>(".qa-item");
-        trigger.setAttribute("aria-expanded", String(!isExpanded));
-        answer?.setAttribute("aria-hidden", String(isExpanded));
-        item?.classList.toggle("is-open", !isExpanded);
-        const indicator = trigger.querySelector(".indicator");
-        if (indicator) indicator.textContent = isExpanded ? "+" : "−";
-    });
-}
